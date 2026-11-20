@@ -1,5 +1,13 @@
 import { useState } from "react";
 
+/*
+ * Login flow:
+ * 1. Submit credentials to the backend.
+ * 2. Receive a JWT token.
+ * 3. Use the token to fetch the authenticated user profile.
+ * 4. Pass { token, user } to App through onLogin.
+ * 5. App updates session and renders the dashboard based on role.
+ */
 const LoginForm = ({onLogin}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,39 +86,54 @@ const LoginForm = ({onLogin}) => {
     }
   };
 
-  return (
-    <div className="login-form">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-    </div>
-  );
+return (
+  <div className="login-form">
+    <h2>Welcome back</h2>
+    <p className="login-description">
+      Sign in to access your learning platform.
+    </p>
+
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="email">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          autoComplete="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          autoComplete="current-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      {error && (
+        <p className="error" role="alert">
+          {error}
+        </p>
+      )}
+
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Logging in..." : "Sign in"}
+      </button>
+    </form>
+  </div>
+);
 };
 
 export default LoginForm;
