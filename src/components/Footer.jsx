@@ -1,11 +1,12 @@
 const Footer = () => {
   return (
     <footer className="footer">
-        <div className="container">
-            <p>&copy; {new Date().getFullYear()} My Company. All rights reserved.</p>
-        </div>
+      <p>
+        &copy; {new Date().getFullYear()} EduLearn LMS.
+        All rights reserved.
+      </p>
     </footer>
   );
-}
+};
 
 export default Footer;
